@@ -1,0 +1,36 @@
+## Setup
+- [x] Confirm Python version (3.12 or 3.13) and uv version
+- [x] Create project virtualenv with uv (`uv venv .venv`)
+- [x] Install Django 5.2 LTS in the venv
+- [x] Verify Django install and version
+- [x] Start Django project (`django-admin startproject config .`)
+- [x] Create app `subscriptions`
+- [x] Run initial migrations
+- [x] Create admin user for Django admin
+
+## Subscription Tracker MVP (Admin-only)
+- [x] Define core models (Category, Subscription, Expense)
+- [x] Add constraints/choices (status, billing cycle, non-negative amounts)
+- [x] Add derived fields logic (next_renewal_date)
+- [x] Register models in admin
+- [x] Admin list display + filters (status, category, renewal date)
+- [x] Create and run migrations
+- [ ] Verify CRUD in Django admin
+
+## Notes / Decisions
+- [ ] Confirm database: SQLite now, PostgreSQL later
+- [ ] Confirm no auth for now (admin-only usage)
+
+## Later: PostgreSQL migration
+- [ ] Install PostgreSQL and create a database/user
+- [ ] Install Python driver (`psycopg`)
+- [ ] Update `config/settings.py` database settings
+- [ ] Run migrations on PostgreSQL
+- [ ] (Optional) Migrate existing data from SQLite
+
+## Later: REST API (Django REST Framework)
+- [ ] Install `djangorestframework`
+- [ ] Add DRF to `INSTALLED_APPS`
+- [ ] Create serializers for Category, Subscription, Expense
+- [ ] Create viewsets and routes
+- [ ] Add basic filtering and pagination
