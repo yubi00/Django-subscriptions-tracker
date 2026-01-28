@@ -15,11 +15,15 @@
 - [x] Register models in admin
 - [x] Admin list display + filters (status, category, renewal date)
 - [x] Create and run migrations
-- [ ] Verify CRUD in Django admin
+- [x] Verify CRUD in Django admin
+- [x] Add Expense name field and auto-fill for subscription expenses
+- [x] Admin UX: auto-fill + disable fields for subscription expenses
 
 ## Notes / Decisions
 - [ ] Confirm database: SQLite now, PostgreSQL later
 - [ ] Confirm no auth for now (admin-only usage)
+## Tools / Data inspection
+- [x] Inspect SQLite data via CLI
 
 ## Later: PostgreSQL migration
 - [ ] Install PostgreSQL and create a database/user
