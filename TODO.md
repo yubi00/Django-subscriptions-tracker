@@ -45,8 +45,8 @@
 - [ ] Add basic filtering and pagination
 
 ## DRF (Now)
-- [ ] Install `djangorestframework`
-- [ ] Add DRF to `INSTALLED_APPS`
-- [ ] Add serializers
-- [ ] Add viewsets + routers
+- [x] Install `djangorestframework`
+- [x] Add DRF to `INSTALLED_APPS`
+- [x] Add serializers
+- [x] Add viewsets + routers
 - [ ] Test API in browser

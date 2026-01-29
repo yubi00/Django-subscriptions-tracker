@@ -208,6 +208,20 @@ We will add Django REST Framework next:
 - Create viewsets + routes
 - Test endpoints in browser
 
+## 13) DRF (implemented)
+
+We added:
+- `subscriptions/serializers.py`
+- `subscriptions/api.py` (ModelViewSets)
+- DRF router in `subscriptions/urls.py`
+
+Try these endpoints:
+```
+http://127.0.0.1:8000/api/categories/
+http://127.0.0.1:8000/api/subscriptions/
+http://127.0.0.1:8000/api/expenses/
+```
+
 To edit data in admin:
 ```powershell
 uv run python manage.py runserver
