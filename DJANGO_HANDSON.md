@@ -222,6 +222,15 @@ http://127.0.0.1:8000/api/subscriptions/
 http://127.0.0.1:8000/api/expenses/
 ```
 
+## 14) OpenAPI / Swagger (drf-spectacular)
+
+We will add OpenAPI docs with drf-spectacular.
+After installing the package, use:
+```
+http://127.0.0.1:8000/api/schema/
+http://127.0.0.1:8000/api/docs/
+```
+
 To edit data in admin:
 ```powershell
 uv run python manage.py runserver

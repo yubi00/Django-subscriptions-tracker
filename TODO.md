@@ -50,3 +50,4 @@
 - [x] Add serializers
 - [x] Add viewsets + routers
 - [ ] Test API in browser
+- [ ] Add OpenAPI/Swagger docs (drf-spectacular)
