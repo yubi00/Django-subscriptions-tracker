@@ -192,6 +192,22 @@ http://127.0.0.1:8000/api/expenses/
 http://127.0.0.1:8000/api/monthly-spend/
 ```
 
+## 11) Admin action: Renew Now
+
+We added an admin action on Subscriptions:
+- Select subscriptions in admin list
+- Choose "Renew selected subscriptions now"
+- This creates today's expense and advances `next_renewal_date`
+
+## 12) DRF (plan)
+
+We will add Django REST Framework next:
+- Install `djangorestframework`
+- Add it to `INSTALLED_APPS`
+- Create serializers
+- Create viewsets + routes
+- Test endpoints in browser
+
 To edit data in admin:
 ```powershell
 uv run python manage.py runserver

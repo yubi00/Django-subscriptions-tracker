@@ -18,7 +18,7 @@
 - [x] Verify CRUD in Django admin
 - [x] Add Expense name field and auto-fill for subscription expenses
 - [x] Admin UX: auto-fill + disable fields for subscription expenses
-- [ ] Renewal processing command (transactional)
+- [x] Renewal processing command (transactional)
 
 ## Basic JSON API (no DRF yet)
 - [x] Add /api/expenses endpoint
@@ -43,3 +43,10 @@
 - [ ] Create serializers for Category, Subscription, Expense
 - [ ] Create viewsets and routes
 - [ ] Add basic filtering and pagination
+
+## DRF (Now)
+- [ ] Install `djangorestframework`
+- [ ] Add DRF to `INSTALLED_APPS`
+- [ ] Add serializers
+- [ ] Add viewsets + routers
+- [ ] Test API in browser

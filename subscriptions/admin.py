@@ -1,9 +1,12 @@
 from django import forms
 from django.contrib import admin
+from django.contrib import messages
+from django.db import transaction
 from django.http import JsonResponse
+from django.utils import timezone
 from django.urls import path, reverse
 
-from .models import Category, Expense, Subscription
+from .models import Category, Expense, Subscription, add_months
 
 
 @admin.register(Category)
@@ -35,6 +38,51 @@ class SubscriptionAdmin(admin.ModelAdmin):
         "user",
     )
     search_fields = ("name",)
+    actions = ["renew_now"]
+
+    @admin.action(description="Renew selected subscriptions now")
+    def renew_now(self, request, queryset):
+        today = timezone.localdate()
+        created = 0
+        skipped = 0
+
+        for subscription in queryset.filter(status=Subscription.Status.ACTIVE):
+            due_date = subscription.next_renewal_date
+            if not due_date or due_date > today:
+                skipped += 1
+                continue
+
+            with transaction.atomic():
+                exists = Expense.objects.filter(
+                    subscription=subscription,
+                    transaction_date=today,
+                    source=Expense.Source.SUBSCRIPTION,
+                ).exists()
+                if exists:
+                    skipped += 1
+                    continue
+
+                Expense.objects.create(
+                    user=subscription.user,
+                    subscription=subscription,
+                    name=subscription.name,
+                    category=subscription.category,
+                    amount=subscription.amount,
+                    currency=subscription.currency,
+                    transaction_date=today,
+                    source=Expense.Source.SUBSCRIPTION,
+                )
+
+                interval = max(1, subscription.billing_interval_months)
+                subscription.next_renewal_date = add_months(today, interval)
+                subscription.save(update_fields=["next_renewal_date", "updated_at"])
+                created += 1
+
+        self.message_user(
+            request,
+            f"Renewals complete. Created: {created}, Skipped: {skipped}",
+            messages.SUCCESS,
+        )
 
 
 class ExpenseAdminForm(forms.ModelForm):
