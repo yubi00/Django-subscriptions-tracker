@@ -18,6 +18,11 @@
 - [x] Verify CRUD in Django admin
 - [x] Add Expense name field and auto-fill for subscription expenses
 - [x] Admin UX: auto-fill + disable fields for subscription expenses
+- [ ] Renewal processing command (transactional)
+
+## Basic JSON API (no DRF yet)
+- [x] Add /api/expenses endpoint
+- [x] Add /api/monthly-spend endpoint
 
 ## Notes / Decisions
 - [ ] Confirm database: SQLite now, PostgreSQL later

@@ -154,6 +154,53 @@ PRAGMA table_info(subscriptions_expense);
 SELECT * FROM subscriptions_expense;
 ```
 
+## 9) Renewal processing (transactional)
+
+Goal: Generate subscription expenses safely using a database transaction.
+
+We added a management command:
+```powershell
+uv run python manage.py renew_subscriptions
+```
+
+What it does:
+- Finds active subscriptions that are due (`next_renewal_date <= today`)
+- In a `transaction.atomic()` block:
+  - Creates a subscription expense for **today** (if it doesn't already exist)
+  - Advances `next_renewal_date` from **today** by the billing interval
+
+Why transaction matters:
+- Expense creation and renewal update succeed together or fail together.
+
+Note:
+- We decided to keep renewals manual for now and removed the `autopay_enabled` field.
+
+## 10) Basic JSON API (no DRF)
+
+Endpoints:
+- `/api/expenses/` returns a JSON list of expenses
+- `/api/monthly-spend/` returns current month total spend
+
+Run the server:
+```powershell
+uv run python manage.py runserver
+```
+
+Test in browser:
+```
+http://127.0.0.1:8000/api/expenses/
+http://127.0.0.1:8000/api/monthly-spend/
+```
+
+To edit data in admin:
+```powershell
+uv run python manage.py runserver
+```
+Then open:
+```
+http://127.0.0.1:8000/admin
+```
+
 ### Model overview (simple explanation)
 
 We have three main tables (models) and they are connected like this:

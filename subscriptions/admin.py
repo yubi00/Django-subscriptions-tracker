@@ -28,7 +28,12 @@ class SubscriptionAdmin(admin.ModelAdmin):
         "status",
         "updated_at",
     )
-    list_filter = ("status", "billing_cycle", "category", "user")
+    list_filter = (
+        "status",
+        "billing_cycle",
+        "category",
+        "user",
+    )
     search_fields = ("name",)
 
 
