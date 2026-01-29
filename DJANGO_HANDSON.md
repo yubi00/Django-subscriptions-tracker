@@ -114,7 +114,7 @@ Goal: Turn our model definitions into real database tables.
   uv run python manage.py migrate
   ```
   What it does:
-  - Reads migration files (including Django’s built-in apps).
+  - Reads migration files (including Django's built-in apps).
   - Executes SQL to create/alter tables in `db.sqlite3`.
 
 Useful note:
@@ -178,7 +178,7 @@ Note:
 ## 10) Basic JSON API (no DRF)
 
 Endpoints:
-- `/api/expenses/` returns a JSON list of expenses
+- `/api/expenses-legacy/` returns a JSON list of expenses
 - `/api/monthly-spend/` returns current month total spend
 
 Run the server:
@@ -188,7 +188,7 @@ uv run python manage.py runserver
 
 Test in browser:
 ```
-http://127.0.0.1:8000/api/expenses/
+http://127.0.0.1:8000/api/expenses-legacy/
 http://127.0.0.1:8000/api/monthly-spend/
 ```
 
@@ -199,16 +199,7 @@ We added an admin action on Subscriptions:
 - Choose "Renew selected subscriptions now"
 - This creates today's expense and advances `next_renewal_date`
 
-## 12) DRF (plan)
-
-We will add Django REST Framework next:
-- Install `djangorestframework`
-- Add it to `INSTALLED_APPS`
-- Create serializers
-- Create viewsets + routes
-- Test endpoints in browser
-
-## 13) DRF (implemented)
+## 12) DRF (implemented)
 
 We added:
 - `subscriptions/serializers.py`
@@ -222,10 +213,14 @@ http://127.0.0.1:8000/api/subscriptions/
 http://127.0.0.1:8000/api/expenses/
 ```
 
-## 14) OpenAPI / Swagger (drf-spectacular)
+## 13) OpenAPI / Swagger (drf-spectacular)
 
-We will add OpenAPI docs with drf-spectacular.
-After installing the package, use:
+Install:
+```powershell
+uv add drf-spectacular
+```
+
+Docs:
 ```
 http://127.0.0.1:8000/api/schema/
 http://127.0.0.1:8000/api/docs/
@@ -341,7 +336,7 @@ Rules:
 - If `source` is "subscription", `subscription` must be set.
 - Manual expenses must have a category.
   Auto-fill for subscription expenses:
-  - `transaction_date` uses `subscription.next_renewal_date` if missing.
+  - `transaction_date` uses `subscription.billing_date` if missing.
   - `amount`, `currency`, `category` pull from the subscription if missing.
   - `source` is forced to "subscription".
 
@@ -350,7 +345,4 @@ When a subscription is selected in admin, the form disables `source`, `category`
 `amount`, `currency`, and `transaction_date`. They are auto-filled on save.
 
 ## Next up
-
-- Create admin user
-- Define core models: Category, Subscription, Expense
-- Register models in Django admin
+- Add auth/permissions, pagination, and filtering to DRF

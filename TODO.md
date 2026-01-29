@@ -51,3 +51,15 @@
 - [x] Add viewsets + routers
 - [ ] Test API in browser
 - [ ] Add OpenAPI/Swagger docs (drf-spectacular)
+
+## REST API (Next)
+- [ ] Authentication & permissions
+- [ ] Pagination
+- [ ] Filtering & ordering
+- [ ] Validation rules in serializers
+- [ ] Consistent error responses
+- [ ] Throttling / rate limiting
+- [ ] API versioning
+- [ ] API tests (DRF test client)
+- [ ] CORS setup (frontend access)
+- [ ] Docs polish (examples, descriptions)
